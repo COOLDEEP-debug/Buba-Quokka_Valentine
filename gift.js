@@ -58,7 +58,7 @@
   hintBtn.addEventListener("click", ()=>{
     if(!passcode) return;
     // cute hint: show length
-    showLock(`Hint: it has ${passcode.length} characters. (Or… just ask me 😄)`);
+    showLock(`Hint:KDB didi usually call you this and it has ${passcode.length} characters. (Or… just ask me 😄)`);
   });
 
   // ====== Counters ======
