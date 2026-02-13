@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>😤 How dare you</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    body::before{ opacity: 0.25; filter: saturate(1.1) contrast(1.08) hue-rotate(-10deg); }
+    body::after{ background: linear-gradient(180deg, rgba(255,235,238,0.82), rgba(255,255,255,0.88)); }
+  </style>
+</head>
+<body>
+  <div id="rose-wall" aria-hidden="true"></div>
+
+  <div class="entry-wrap">
+    <div class="card angry-card">
+      <div class="angry-title">HOW DARE YOU 😤</div>
+      <p class="angry-sub">Go back and click “Yes”. That’s the correct answer. 😌</p>
+      <div class="btnrow" style="justify-content:center;">
+        <a class="btn btn-primary" href="index.html">Go back</a>
+      </div>
+      <p class="small" style="margin-top:10px;">(Okay okay, I’m pretending to be angry. 🌹)</p>
+    </div>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="shared.js"></script>
+  <script>
+    RoseWall.mount("rose-wall", 240);
+    // personalize
+    document.querySelectorAll("[data-gf-name]").forEach(s => s.textContent = (window.CONTENT?.girlfriendName || "my love"));
+  </script>
+</body>
+</html>

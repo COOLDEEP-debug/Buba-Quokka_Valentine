@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Open When 💌</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="rose-wall" aria-hidden="true"></div>
+
+  <!-- Passcode overlay (optional) -->
+  <div id="lock" class="lock hidden">
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div style="font-weight:900;font-size:18px;">Tiny secret check 🔐</div>
+        <a class="btn btn-ghost" href="index.html" style="padding:8px 10px;border-radius:999px;">Back</a>
+      </div>
+      <p class="small" style="margin:10px 0 0; line-height:1.5;">
+        This is just for cuteness — it’s not “real security”.
+        <br/>
+        (You can disable it by setting <b>passcode</b> to "" in <b>content.js</b>.)
+      </p>
+      <input id="passInput" placeholder="Enter the secret code…" />
+      <div class="btnrow" style="margin-top:10px;">
+        <button id="unlockBtn" class="btn btn-primary">Unlock 💗</button>
+        <button id="hintBtn" class="btn btn-ghost">Hint</button>
+      </div>
+      <p id="lockMsg" class="small" style="margin-top:10px;"></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="topnav">
+      <div class="brand"><span class="dot"></span><span>For <span id="gfNameTop">you</span></span></div>
+      <div class="navlinks">
+        <a href="#envelopes">Envelopes</a>
+        <a href="#timeline">Timeline</a>
+       
+       
+        <a href="#coupons">Coupons</a>
+        <a href="#reasons">Reasons</a>
+        <a href="#quiz">Quiz</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h1>Open When 💌</h1>
+      <p>
+        For the days we’re apart — open these whenever you need me.
+        <br/>
+        Happy 11 months (and counting) ❤️
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="card stat">
+        <div class="label">Together for</div>
+        <div class="value" id="daysTogether">—</div>
+        <div class="hint">Based on the date in <b>content.js</b>.</div>
+      </div>
+      <div class="card stat">
+        <div class="label">Next meet / date</div>
+        <div class="value" id="nextMeet">—</div>
+        <div class="hint">Set <b>nextMeetDate</b> in <b>content.js</b> (optional).</div>
+      </div>
+      <div class="card stat">
+        <div class="label">Little note</div>
+        <div class="value" id="littleNote">🌹</div>
+        <div class="hint">P.S. Tap the SOS button anytime.</div>
+      </div>
+    </div>
+
+    <section id="envelopes" class="card section">
+      <h2>Open When…</h2>
+      <p class="sub">Tap an envelope. Some are “sealed” until a specific date.</p>
+      <div id="grid" class="grid"></div>
+      <p class="small" style="margin-top:12px;">
+        Tip: “opened ✅” is saved on this device (localStorage).
+      </p>
+    </section>
+
+    <section id="timeline" class="card section">
+      <h2>Our Story Timeline (11 months)</h2>
+      <p class="sub">A mini documentary — month by month (placeholders for now).</p>
+      <div id="timelineList" class="timeline"></div>
+    </section>
+
+    
+
+    <section id="coupons" class="card section">
+      <h2>Love Coupons</h2>
+      <p class="sub">Redeem anytime. (Saved on this device.)</p>
+      <div id="couponGrid" class="coupons"></div>
+    </section>
+
+    <section id="reasons" class="card section">
+      <h2>Reasons I Love You (Generator)</h2>
+      <p class="sub">Press the button whenever you need a reminder.</p>
+      <div id="reasonBox" class="reason-box">Press “Random Reason” 💗</div>
+      <div class="btnrow">
+        <button id="reasonBtn" class="btn btn-primary">Random Reason</button>
+        <button id="saveReasonBtn" class="btn btn-ghost">Save to favorites</button>
+        <button id="clearFavsBtn" class="btn btn-ghost">Clear favorites</button>
+      </div>
+      <div style="margin-top:10px;">
+        <div class="small" style="margin-bottom:6px;">Favorites:</div>
+        <div id="favList" class="favs"></div>
+      </div>
+    </section>
+
+    <section id="quiz" class="card section">
+      <h2>Mini Quiz</h2>
+      <p class="sub">A tiny “how well do you know us?” game.</p>
+      <div id="quizWrap" class="quiz"></div>
+      <div class="btnrow">
+        <button id="submitQuizBtn" class="btn btn-primary">Submit Quiz</button>
+        <button id="resetQuizBtn" class="btn btn-ghost">Reset</button>
+      </div>
+      <div id="quizResult" class="result hidden" style="margin-top:12px;"></div>
+    </section>
+
+    <div class="footer container">
+      Made with 🌹 for <span id="gfNameFoot">you</span>.
+      <br/>
+      (Replace all placeholder text/photos/voice notes in <b>content.js</b> + <b>assets/</b>.)
+    </div>
+  </div>
+
+  <!-- Envelope / gallery modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Envelope">
+    <div class="modal-card">
+      <button id="closeBtn" class="close" aria-label="Close">×</button>
+      <h3 id="mTitle">—</h3>
+      <div id="mBody" class="body"></div>
+
+      <div id="specialArea"></div>
+
+      <div class="media">
+        <img id="mPhoto" class="hidden" alt="Memory photo"/>
+        <audio id="mAudio" class="hidden" controls></audio>
+      </div>
+
+      <div class="actions">
+        <a id="mAction" class="btn btn-primary hidden" target="_blank" rel="noreferrer">Do this now</a>
+        <button id="markUnopenedBtn" class="btn btn-ghost hidden">Mark unopened</button>
+      </div>
+
+      <p id="mMeta" class="small" style="margin-top:10px;"></p>
+    </div>
+  </div>
+
+  <!-- SOS button -->
+  <button id="sos" title="Open a comfort message">SOS 💗</button>
+
+  <script src="content.js"></script>
+  <script src="shared.js"></script>
+  <script src="gift.js"></script>
+</body>
+</html>
